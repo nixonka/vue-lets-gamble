@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <v-app>
     <div class="main">
       <div class="main__background" :class="{ 'main__background--blured': highlight }">
       </div>
@@ -9,6 +10,7 @@
         </div>
         <router-view />
       </div>
+    </v-app>
   </div>
 </template>
 <script>
@@ -30,7 +32,7 @@ export default {
 body {
   padding: 0;
   margin: 0;
-  background-color: #000000;;
+  background-color: #000000;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -38,6 +40,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background: none;
 }
 
 #nav {
