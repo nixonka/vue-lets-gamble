@@ -18,11 +18,6 @@
 </template>
 <script>
 export default {
-  // data () {
-  //   return {
-
-  //   }
-  // },
   computed: {
     rounds () {
       return this.$store.getters.getRounds

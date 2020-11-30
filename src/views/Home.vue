@@ -11,8 +11,11 @@ export default {
   name: 'Home',
   methods: {
     play () {
+      this.$store.commit('setPlayed', true)
       this.$store.dispatch('setRounds')
       this.$store.dispatch('setBets')
+
+      this.$router.push('/about')
     }
   },
   components: {}

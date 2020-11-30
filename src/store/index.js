@@ -13,6 +13,7 @@ const headers = {
 
 export default new Vuex.Store({
   state: {
+    played: false,
     resultsHeaders: [
       {
         text: 'Display ID',
@@ -37,13 +38,19 @@ export default new Vuex.Store({
     setRounds (state, payload) {
       if (!state.rounds.some((r) => r.displayId === payload.displayId)) {
         state.rounds = [...state.rounds, payload]
+      } else {
+        state.rounds = [
+          ...state.rounds.map(item =>
+            item.displayId !== payload.displayId ? item : { ...item, ...payload }
+          )
+        ]
       }
     },
     setBets (state, payload) {
       state.bets = Object.entries(payload).map((i) => { return { bet: i[0], ...i[1] } })
-      console.log(
-        state.bets
-      )
+    },
+    setPlayed (state, payload) {
+      state.played = payload
     }
   },
   actions: {
@@ -54,6 +61,12 @@ export default new Vuex.Store({
     async setBets (state) {
       const bets = await fetch(`${urlStats}${new Date().toISOString().substring(0, 10)}`, headers)
       state.commit('setBets', (await bets.json()).bets)
+    },
+    SOCKET_message (state, message) {
+      if (state.getters.getPlayed) {
+        const messageParsed = JSON.parse(message)
+        state.commit('setRounds', { ...messageParsed.round, ...{ result: messageParsed.result } })
+      }
     }
   },
   modules: {
@@ -62,6 +75,7 @@ export default new Vuex.Store({
     getRounds: state => state.rounds,
     getResultsHeaders: state => state.resultsHeaders,
     getBets: state => state.bets,
-    getStatsHeaders: state => state.statsHeaders
+    getStatsHeaders: state => state.statsHeaders,
+    getPlayed: state => state.played
   }
 })

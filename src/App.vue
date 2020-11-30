@@ -1,9 +1,11 @@
 <template>
   <div id="app">
     <v-app>
-    <div class="main">
-      <div class="main__background" :class="{ 'main__background--blured': highlight }">
-      </div>
+      <div class="main">
+        <div
+          class="main__background"
+          :class="{ 'main__background--blured': highlight }"
+        ></div>
         <div id="nav">
           <router-link to="/">Play</router-link> |
           <router-link to="/about">Results</router-link>
@@ -15,6 +17,11 @@
 </template>
 <script>
 export default {
+  sockets: {
+    connect: function () {
+      console.log('socket connected')
+    }
+  },
   computed: {
     highlight () {
       return this.$route.path !== '/'
