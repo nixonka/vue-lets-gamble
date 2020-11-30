@@ -8,7 +8,7 @@
         ></div>
         <div id="nav">
           <router-link to="/">Play</router-link> |
-          <router-link to="/about">Results</router-link>
+          <router-link to="/results">Results</router-link>
         </div>
         <router-view />
       </div>

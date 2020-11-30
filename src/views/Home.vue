@@ -15,7 +15,7 @@ export default {
       this.$store.dispatch('setRounds')
       this.$store.dispatch('setBets')
 
-      this.$router.push('/about')
+      this.$router.push('/results')
     }
   },
   components: {}

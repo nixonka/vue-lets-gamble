@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="results">
     <h1>Results</h1>
     <v-data-table
       :headers="headers"
