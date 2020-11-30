@@ -1,5 +1,5 @@
 <template>
-  <div class="results">
+  <div v-if="played" class="results">
     <h1>Results</h1>
     <v-data-table
       :headers="headers"
@@ -15,22 +15,19 @@
       class="elevation-1"
     ></v-data-table>
   </div>
+  <h1 v-else>You have to put some money in the game!</h1>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 export default {
   computed: {
-    rounds () {
-      return this.$store.getters.getRounds
-    },
-    headers () {
-      return this.$store.getters.getResultsHeaders
-    },
-    bets () {
-      return this.$store.getters.getBets
-    },
-    headersBets () {
-      return this.$store.getters.getStatsHeaders
-    }
+    ...mapGetters({
+      played: 'getPlayed',
+      rounds: 'getRounds',
+      headers: 'getResultsHeaders',
+      bets: 'getBets',
+      headersBets: 'getStatsHeaders'
+    })
   }
 }
 </script>

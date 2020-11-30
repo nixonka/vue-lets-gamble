@@ -1,12 +1,13 @@
 <template>
   <div class="home">
-    <button @click="play">Play</button>
+    <v-btn v-if="!played" @click="play" elevation="2">Play</v-btn>
+    <h1 v-else>You already played!</h1>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
+import { mapGetters } from 'vuex'
 export default {
   name: 'Home',
   methods: {
@@ -18,6 +19,10 @@ export default {
       this.$router.push('/results')
     }
   },
-  components: {}
+  computed: {
+    ...mapGetters({
+      played: 'getPlayed'
+    })
+  }
 }
 </script>
